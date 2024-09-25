@@ -25,12 +25,20 @@ export const availableIngredients = [
 const App = () => {
   const [stack, setStack] = useState([])
 
+  const handleAddIngredient = (ingredient) => {
+    setStack([...stack, ingredient])
+  }
+
+  const handleRemoveIngredient = ( ingredientIndex ) => {
+    setStack(stack.filter((_, index) => index != ingredientIndex))
+  }
+
   return (
     <main>
       <h1>Burger Stacker</h1>
       <section>
-      <IngredientList availableIngredients={ availableIngredients }/>
-      <BurgerStack />
+      <IngredientList availableIngredients={ availableIngredients } handleAddIngredient={handleAddIngredient}/>
+      <BurgerStack stack={ stack } handleRemoveIngredient={handleRemoveIngredient}/>
       </section>
     </main>
   );
